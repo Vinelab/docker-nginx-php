@@ -29,3 +29,9 @@ MAINTAINER You Name <your@email>
 
 COPY . /code
 ```
+
+## Exposing Ports
+By default `443` and `80` are exposed
+
+## License
+This package is distributed under the MIT License (see LICENSE) file distributed with this package.
