@@ -28,9 +28,10 @@ RUN apk add --no-cache bash \
     php5-phar \
     php5-soap \
     php5-dom \
+    php5-bcmath \
     php5-zip \
-        linux-headers \
-        libffi-dev
+    linux-headers \
+    libffi-dev
 
 RUN apk add --no-cache supervisor
 
