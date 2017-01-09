@@ -28,6 +28,8 @@ VOLUME /code
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
+WORKDIR /code
+
 EXPOSE 443 80
 
 CMD /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
