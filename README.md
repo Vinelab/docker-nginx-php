@@ -1,5 +1,5 @@
 # Nginx • PHP-FPM
-A PHP application container.
+A PHP application container, with the mongo extension installed.
 
 ## Tags
 - `latest`
