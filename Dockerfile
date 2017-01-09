@@ -28,6 +28,12 @@ VOLUME /code
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
+# Install composer
+RUN apt-get install -y git zip
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
+RUN chmod +x /usr/local/bin/composer
+
 WORKDIR /code
 
 EXPOSE 443 80
