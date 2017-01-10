@@ -1,4 +1,4 @@
-FROM php:5.6.27-fpm
+FROM php:7.0.1-fpm
 
 MAINTAINER Abed Halawi <abed.halawi@vinelab.com>
 
