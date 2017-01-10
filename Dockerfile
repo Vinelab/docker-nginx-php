@@ -12,7 +12,7 @@ RUN docker-php-ext-install bcmath
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 
 RUN apt-get update
-RUN apt-get install -y nginx supervisor
+RUN apt-get install -y nginx supervisor cron
 
 RUN mkdir /code
 
