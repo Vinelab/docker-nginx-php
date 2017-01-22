@@ -14,6 +14,8 @@ RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 RUN apt-get update
 RUN apt-get install -y nginx supervisor cron
 
+RUN docker-php-ext-install zip
+
 RUN mkdir /code
 
 RUN useradd --no-create-home nginx
