@@ -31,8 +31,6 @@ COPY host.conf /etc/nginx/conf.d/default.conf
 # add cron runner script
 COPY cron.sh /cron.sh
 
-VOLUME /code
-
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 WORKDIR /code
