@@ -1,4 +1,4 @@
-FROM php:7.2.1-fpm
+FROM php:7.1.13-fpm
 
 MAINTAINER Abed Halawi <abed.halawi@vinelab.com>
 
@@ -8,7 +8,7 @@ ENV fpm_www_conf /usr/local/etc/php-fpm.d/www.conf
 
 RUN apt-get update
 RUN apt-get install -y autoconf pkg-config libssl-dev
-RUN pecl install mongodb-1.2.2
+RUN pecl install mongodb
 RUN docker-php-ext-install bcmath
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 
