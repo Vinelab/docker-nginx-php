@@ -4,7 +4,7 @@ MAINTAINER Abed Halawi <abed.halawi@vinelab.com>
 
 ENV php_conf /usr/local/etc/php/php.ini
 ENV fpm_conf /usr/local/etc/php/php-fpm.conf
-ENV fpm_www_conf /usr/local/etc/php-fpm.d/www.conf
+ENV fpm_conf_dir /usr/local/etc/php-fpm.d/
 
 RUN apt-get update
 RUN apt-get install -y autoconf pkg-config libssl-dev
@@ -22,11 +22,14 @@ RUN mkdir /code
 RUN useradd --no-create-home nginx
 
 # tweak php-fpm config
-COPY php.ini ${php_conf}
-COPY www.conf ${fpm_www_conf}
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY php.conf /etc/nginx/php.conf
-COPY host.conf /etc/nginx/conf.d/default.conf
+COPY php/php.ini ${php_conf}
+COPY php/www.conf.default ${fpm_conf_dir}/www.conf
+COPY php/pools/pool-1.conf ${fpm_conf_dir}/pool-1.conf
+COPY php/pools/pool-2.conf ${fpm_conf_dir}/pool-2.conf
+COPY php/pools/pool-3.conf ${fpm_conf_dir}/pool-3.conf
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/php.conf /etc/nginx/php.conf
+COPY nginx/host.conf /etc/nginx/conf.d/default.conf
 
 # add cron runner script
 COPY cron.sh /cron.sh
