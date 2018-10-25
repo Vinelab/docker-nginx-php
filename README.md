@@ -3,6 +3,7 @@ A PHP application container, with the mongo extension installed.
 
 ## Tags
 - `latest`
+- `mole`: ELK enabled image for logging
 
 ## Usage
 You can either mount code into the container and run it, or use this image as base for an application image.
