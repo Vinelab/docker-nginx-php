@@ -1,12 +1,15 @@
-name: ${APP_NAME}
+name: ${SERVICE_INSTANCE_NAME}
 
 fields_under_root: true
 fields:
-  name: ${APP_NAME}
-  env: ${APP_ENV}
+  trellis:
+    env: ${APP_ENV}
+    instance:
+      name: ${SERVICE_INSTANCE_NAME}
+      type: ${SERVICE_INSTANCE_TYPE}
 
 output.elasticsearch:
-  hosts: ["http://172.17.0.1:9200"]
+  hosts: [$ELASTICSEARCH_HOST]
 
 setup.kibana:
   host: "172.17.0.1:5601"

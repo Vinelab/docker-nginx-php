@@ -1,11 +1,23 @@
-# Nginx • PHP-FPM
-A PHP application container, with the mongo extension installed.
+# Nginx • PHP-FPM | Mole
+A PHP application container, with the mongo extension installed. Also includes Filebeat for ELK logging NGINX activity (hence Mole).
 
 ## Tags
 - `latest`
+- `mole`: Includes ELK stack's tools to enable logging
 
 ## Usage
 You can either mount code into the container and run it, or use this image as base for an application image.
+
+In addition to running code, this container enables logging using Filebeat.
+
+### Required ENV Variables
+
+| Tool | Variable | Description  |
+|---|---|---|
+| **Filebeat**  | `APP_ENV`  | The environment in which the service is running (namespace)  |
+|   | `ELASTICSEARCH_HOST`  | The host URL to reach Elasticsearch  |
+|   | `SERVICE_INSTANCE_NAME`  | The service's instance (container) name  |
+|   | `SERVICE_INSTANCE_TYPE`  | The type of the service (i.e. HTTP, Queue Consumer, etc.)  |
 
 ### Mounting Code
 ```bash
