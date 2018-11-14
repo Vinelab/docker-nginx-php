@@ -9,7 +9,7 @@ ENV fpm_conf_dir /usr/local/etc/php-fpm.d/
 
 RUN apt-get update
 RUN apt-get install -y autoconf pkg-config libssl-dev
-RUN pecl install mongodb
+RUN pecl install mongodb-1.2.11
 RUN docker-php-ext-install bcmath
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 
