@@ -1,4 +1,4 @@
-FROM php:7.1.13-fpm
+FROM php:7.1.27-fpm-stretch
 
 MAINTAINER Abed Halawi <abed.halawi@vinelab.com>
 
@@ -9,6 +9,7 @@ RUN apt-get update
 RUN apt-get install -y autoconf pkg-config libssl-dev
 RUN pecl install mongodb-1.2.2
 RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install sockets
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 
 RUN apt-get update
