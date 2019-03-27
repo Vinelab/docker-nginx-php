@@ -1,27 +1,33 @@
-FROM php:7.1.13-fpm
+FROM php:7.1.27-fpm-stretch
 
-MAINTAINER Abed Halawi <abed.halawi@vinelab.com>
+LABEL maintainer="Abed Halawi <abed.halawi@vinelab.com>"
 
 ENV FILEBEAT_VERSION 6.4.2
 ENV php_conf /usr/local/etc/php/php.ini
 ENV fpm_conf /usr/local/etc/php/php-fpm.conf
 ENV fpm_conf_dir /usr/local/etc/php-fpm.d/
 
-RUN apt-get update
-RUN apt-get install -y autoconf pkg-config libssl-dev
-RUN pecl install mongodb-1.2.11
+RUN apt-get update \
+    && apt-get install -y autoconf pkg-config libssl-dev
+
 RUN docker-php-ext-install bcmath
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
+RUN docker-php-ext-install sockets
+
+RUN pecl install mongodb-1.2.2  \
+    && docker-php-ext-enable mongodb
+
+RUN apt-get update \
+    && apt-get install -y libzip-dev zip \
+    && docker-php-ext-configure zip --with-libzip \
+    && docker-php-ext-install zip
 
 # install filebeat and NGINX
-RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-amd64.deb
-RUN dpkg -i filebeat-${FILEBEAT_VERSION}-amd64.deb
-RUN filebeat modules enable nginx
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-amd64.deb \
+    && dpkg -i filebeat-${FILEBEAT_VERSION}-amd64.deb \
+    && filebeat modules enable nginx
 
-RUN apt-get update
-RUN apt-get install -y nginx supervisor cron
-
-RUN docker-php-ext-install zip
+RUN apt-get update \
+    && apt-get install -y nginx supervisor cron
 
 RUN mkdir /code
 
