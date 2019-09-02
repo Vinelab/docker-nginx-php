@@ -42,6 +42,12 @@ COPY cron.sh /cron.sh
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
+# install cronitor cli
+WORKDIR /tmp
+RUN curl -sOL https://cronitor.io/dl/cronitor-stable-linux-amd64.tgz
+RUN tar xvf cronitor-stable-linux-amd64.tgz -C /usr/bin/
+RUN rm cronitor-stable-linux-amd64.tgz
+
 WORKDIR /code
 
 EXPOSE 443 80
