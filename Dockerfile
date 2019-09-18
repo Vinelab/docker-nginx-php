@@ -18,7 +18,7 @@ RUN pecl install mongodb-1.2.2  \
 RUN apt-get update \
     && apt-get install -y libzip-dev zip \
     && docker-php-ext-configure zip --with-libzip \
-    && docker-php-ext-install zip
+    && docker-php-ext-install zip pcntl
 
 RUN apt-get update \
     && apt-get install -y nginx supervisor cron
