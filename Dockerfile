@@ -8,8 +8,7 @@ ENV fpm_conf /usr/local/etc/php/php-fpm.conf
 RUN apt-get update \
     && apt-get install -y autoconf pkg-config libssl-dev
 
-RUN docker-php-ext-install bcmath
-RUN docker-php-ext-install sockets
+RUN docker-php-ext-install bcmath pcntl sockets
 
 RUN pecl install mongodb-1.2.2  \
     && docker-php-ext-enable mongodb
