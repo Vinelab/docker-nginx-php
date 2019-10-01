@@ -14,6 +14,10 @@ RUN pecl install mongodb-1.2.2  \
     && docker-php-ext-enable mongodb
 
 RUN apt-get update \
+  && apt-get install -y libpq-dev \
+  && docker-php-ext-install pdo pdo_pgsql
+
+RUN apt-get update \
     && apt-get install -y nginx supervisor cron
 
 RUN mkdir /code
