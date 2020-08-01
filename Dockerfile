@@ -1,4 +1,4 @@
-FROM php:7.1.27-fpm-stretch
+FROM php:7.4-fpm
 
 LABEL maintainer="Abed Halawi <abed.halawi@vinelab.com>"
 
@@ -9,9 +9,6 @@ RUN apt-get update \
     && apt-get install -y autoconf pkg-config libssl-dev
 
 RUN docker-php-ext-install bcmath pcntl sockets
-
-RUN pecl install mongodb-1.2.2  \
-    && docker-php-ext-enable mongodb
 
 RUN apt-get update \
     && apt-get install -y nginx supervisor cron
