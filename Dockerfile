@@ -24,12 +24,13 @@ RUN apt-get update && \
 RUN curl -sOL https://cronitor.io/dl/cronitor-stable-linux-amd64.tgz && \
     tar xvf cronitor-stable-linux-amd64.tgz -C /usr/bin/ && \
     rm cronitor-stable-linux-amd64.tgz
-# install composer and extention for php coverage
-RUN apt-get update \
-    && apt-get install -y git zip \
-    && curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod +x /usr/local/bin/composer && \
+
+# install composer and pcov for php coverage
+RUN apt-get update && \
+    apt-get install -y git zip && \
+    curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer && \
+    chmod +x /usr/local/bin/composer && \
     pecl install pcov && docker-php-ext-enable pcov
 
 RUN apt-get update && \
