@@ -29,11 +29,12 @@ COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 # Install composer and pcov for php coverage
 RUN apt-get update \
-    && apt-get install -y git zip \
+    && apt-get install -y git zip libpq-dev\
     && curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer && \
     pecl install pcov && docker-php-ext-enable pcov
+
 
 WORKDIR /code
 
