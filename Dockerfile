@@ -1,4 +1,4 @@
-FROM php:8-fpm
+FROM php:8.1.7-fpm
 
 LABEL maintainer="Abed Halawi <abed.halawi@vinelab.com>"
 
