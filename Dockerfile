@@ -6,12 +6,8 @@ ENV php_conf /usr/local/etc/php/php.ini
 ENV fpm_conf /usr/local/etc/php/php-fpm.conf
 
 RUN apt-get update \
-    && apt-get install -y autoconf pkg-config libssl-dev
-
-RUN docker-php-ext-install bcmath pcntl sockets
-
-RUN apt-get update \
-    && apt-get install -y nginx supervisor cron
+    && apt-get install -y autoconf pkg-config libssl-dev nginx supervisor cron \
+    && docker-php-ext-install bcmath pcntl sockets
 
 RUN mkdir /code
 
@@ -29,11 +25,11 @@ COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 # Install git zip libpq and pcov for php coverage
 RUN apt-get update \
-    && apt-get install -y git zip libpq-dev\
-    && pecl install pcov && docker-php-ext-enable 
+    && apt-get install -y git zip libpq-dev \
+    && pecl install pcov && docker-php-ext-enable pcov
 
 # Install composer
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
 
 WORKDIR /code
 
