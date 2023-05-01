@@ -29,7 +29,7 @@ RUN apt-get update \
     && pecl install pcov && docker-php-ext-enable pcov
 
 # Install composer
-COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
+COPY --from=composer/composer:latest-bin /composer /usr/local/bin/composer
 
 WORKDIR /code
 
