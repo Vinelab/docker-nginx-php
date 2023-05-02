@@ -6,6 +6,10 @@ ENV php_conf /usr/local/etc/php/php.ini
 ENV fpm_conf /usr/local/etc/php/php-fpm.conf
 ENV fpm_conf_dir /usr/local/etc/php-fpm.d/
 
+RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list
+RUN sed -i 's|security.debian.org|archive.debian.org/|g' /etc/apt/sources.list
+RUN sed -i '/stretch-updates/d' /etc/apt/sources.list
+
 RUN apt-get update && \
     apt-get install -y autoconf pkg-config libssl-dev
 
@@ -21,9 +25,9 @@ RUN apt-get update && \
     docker-php-ext-configure zip --with-libzip && \
     docker-php-ext-install zip pcntl
 
-RUN curl -sOL https://cronitor.io/dl/cronitor-stable-linux-amd64.tgz && \
-    tar xvf cronitor-stable-linux-amd64.tgz -C /usr/bin/ && \
-    rm cronitor-stable-linux-amd64.tgz
+RUN curl -sOL https://cronitor.io/dl/linux_amd64.tar.gz && \
+    tar xvf linux_amd64.tar.gz -C /usr/bin/ && \
+    rm linux_amd64.tar.gz
 
 # install composer and pcov for php coverage
 RUN apt-get update && \
@@ -36,7 +40,7 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install -y nginx supervisor cron
 
-RUN mkdir /code
+RUN mkdir /code         
 
 RUN useradd --no-create-home nginx
 
